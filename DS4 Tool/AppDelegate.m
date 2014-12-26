@@ -7,20 +7,34 @@
 //
 
 #import "AppDelegate.h"
+#import "OpenEmuSystem/OEDeviceManager.h"
+#import "EventProcessor.h"
 
-@interface AppDelegate ()
 
-@property (weak) IBOutlet NSWindow *window;
-@end
-
-@implementation AppDelegate
+@implementation AppDelegate {
+	NSStatusItem *_statusItem;
+	id _monitor;
+	EventProcessor *_eventProcessor;
+}
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-	// Insert code here to initialize your application
+	_statusItem = [NSStatusBar.systemStatusBar statusItemWithLength:NSStatusBar.systemStatusBar.thickness];
+	_statusItem.title = @"🎮";
+	_statusItem.menu = NSMenu.new;
+	[_statusItem.menu addItemWithTitle:@"Quit" action:@selector(terminate:) keyEquivalent:@"q"];
+	
+	_eventProcessor = EventProcessor.new;
+	
+	_monitor = [OEDeviceManager.sharedDeviceManager addGlobalEventMonitorHandler:^BOOL(OEDeviceHandler *handler, OEHIDEvent *event) {
+		[_eventProcessor processEvent:event];
+		return NO;
+	}];
 }
 
-- (void)applicationWillTerminate:(NSNotification *)aNotification {
-	// Insert code here to tear down your application
+- (void)terminate:(id)sender {
+	exit(0);
 }
+
+- (void)applicationWillTerminate:(NSNotification *)notification {}
 
 @end

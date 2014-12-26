@@ -11,16 +11,32 @@
 		5F1C74241A4CA32A00C79613 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1C74231A4CA32A00C79613 /* main.m */; };
 		5F1C74261A4CA32A00C79613 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F1C74251A4CA32A00C79613 /* Images.xcassets */; };
 		5F1C74291A4CA32A00C79613 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F1C74271A4CA32A00C79613 /* MainMenu.xib */; };
-		5F1C74351A4CA32B00C79613 /* DS4_ToolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1C74341A4CA32B00C79613 /* DS4_ToolTests.m */; };
+		5FE839F71A4D710600D29914 /* Controller-Database.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5FE839F31A4D710600D29914 /* Controller-Database.plist */; };
+		5FE83A001A4D712500D29914 /* OpenEmuSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE839FD1A4D710600D29914 /* OpenEmuSystem.framework */; };
+		5FE83A031A4D73BF00D29914 /* EventProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE83A021A4D73BF00D29914 /* EventProcessor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5F1C742F1A4CA32B00C79613 /* PBXContainerItemProxy */ = {
+		5FE839FA1A4D710600D29914 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5F1C74131A4CA32A00C79613 /* Project object */;
+			containerPortal = 5FE839F41A4D710600D29914 /* OpenEmu-SDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C6772A261710A4BA00ED580A;
+			remoteInfo = OpenEmuBase;
+		};
+		5FE839FC1A4D710600D29914 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5FE839F41A4D710600D29914 /* OpenEmu-SDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C6772A8C1710CD7E00ED580A;
+			remoteInfo = OpenEmuSystem;
+		};
+		5FE839FE1A4D712000D29914 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5FE839F41A4D710600D29914 /* OpenEmu-SDK.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 5F1C741A1A4CA32A00C79613;
-			remoteInfo = "DS4 Tool";
+			remoteGlobalIDString = C6772A8B1710CD7E00ED580A;
+			remoteInfo = OpenEmuSystem;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -32,9 +48,11 @@
 		5F1C74231A4CA32A00C79613 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5F1C74251A4CA32A00C79613 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5F1C74281A4CA32A00C79613 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		5F1C742E1A4CA32B00C79613 /* DS4 ToolTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DS4 ToolTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5F1C74331A4CA32B00C79613 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5F1C74341A4CA32B00C79613 /* DS4_ToolTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DS4_ToolTests.m; sourceTree = "<group>"; };
+		5FE839F31A4D710600D29914 /* Controller-Database.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Controller-Database.plist"; sourceTree = "<group>"; };
+		5FE839F41A4D710600D29914 /* OpenEmu-SDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "OpenEmu-SDK.xcodeproj"; sourceTree = "<group>"; };
+		5FE83A011A4D73BF00D29914 /* EventProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventProcessor.h; sourceTree = "<group>"; };
+		5FE83A021A4D73BF00D29914 /* EventProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventProcessor.m; sourceTree = "<group>"; };
+		5FE83A041A4D8A1300D29914 /* Vectors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vectors.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,13 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5F1C742B1A4CA32B00C79613 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				5FE83A001A4D712500D29914 /* OpenEmuSystem.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,7 +71,6 @@
 			isa = PBXGroup;
 			children = (
 				5F1C741D1A4CA32A00C79613 /* DS4 Tool */,
-				5F1C74311A4CA32B00C79613 /* DS4 ToolTests */,
 				5F1C741C1A4CA32A00C79613 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -68,7 +79,6 @@
 			isa = PBXGroup;
 			children = (
 				5F1C741B1A4CA32A00C79613 /* DS4 Tool.app */,
-				5F1C742E1A4CA32B00C79613 /* DS4 ToolTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -76,8 +86,12 @@
 		5F1C741D1A4CA32A00C79613 /* DS4 Tool */ = {
 			isa = PBXGroup;
 			children = (
+				5FE839F21A4D70FB00D29914 /* OpenEmu SDK */,
 				5F1C74201A4CA32A00C79613 /* AppDelegate.h */,
 				5F1C74211A4CA32A00C79613 /* AppDelegate.m */,
+				5FE83A041A4D8A1300D29914 /* Vectors.h */,
+				5FE83A011A4D73BF00D29914 /* EventProcessor.h */,
+				5FE83A021A4D73BF00D29914 /* EventProcessor.m */,
 				5F1C74251A4CA32A00C79613 /* Images.xcassets */,
 				5F1C74271A4CA32A00C79613 /* MainMenu.xib */,
 				5F1C741E1A4CA32A00C79613 /* Supporting Files */,
@@ -94,21 +108,22 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		5F1C74311A4CA32B00C79613 /* DS4 ToolTests */ = {
+		5FE839F21A4D70FB00D29914 /* OpenEmu SDK */ = {
 			isa = PBXGroup;
 			children = (
-				5F1C74341A4CA32B00C79613 /* DS4_ToolTests.m */,
-				5F1C74321A4CA32B00C79613 /* Supporting Files */,
+				5FE839F31A4D710600D29914 /* Controller-Database.plist */,
+				5FE839F41A4D710600D29914 /* OpenEmu-SDK.xcodeproj */,
 			);
-			path = "DS4 ToolTests";
+			name = "OpenEmu SDK";
 			sourceTree = "<group>";
 		};
-		5F1C74321A4CA32B00C79613 /* Supporting Files */ = {
+		5FE839F51A4D710600D29914 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5F1C74331A4CA32B00C79613 /* Info.plist */,
+				5FE839FB1A4D710600D29914 /* OpenEmuBase.framework */,
+				5FE839FD1A4D710600D29914 /* OpenEmuSystem.framework */,
 			);
-			name = "Supporting Files";
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,29 +140,12 @@
 			buildRules = (
 			);
 			dependencies = (
+				5FE839FF1A4D712000D29914 /* PBXTargetDependency */,
 			);
 			name = "DS4 Tool";
 			productName = "DS4 Tool";
 			productReference = 5F1C741B1A4CA32A00C79613 /* DS4 Tool.app */;
 			productType = "com.apple.product-type.application";
-		};
-		5F1C742D1A4CA32B00C79613 /* DS4 ToolTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5F1C743B1A4CA32B00C79613 /* Build configuration list for PBXNativeTarget "DS4 ToolTests" */;
-			buildPhases = (
-				5F1C742A1A4CA32B00C79613 /* Sources */,
-				5F1C742B1A4CA32B00C79613 /* Frameworks */,
-				5F1C742C1A4CA32B00C79613 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5F1C74301A4CA32B00C79613 /* PBXTargetDependency */,
-			);
-			name = "DS4 ToolTests";
-			productName = "DS4 ToolTests";
-			productReference = 5F1C742E1A4CA32B00C79613 /* DS4 ToolTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -160,10 +158,6 @@
 				TargetAttributes = {
 					5F1C741A1A4CA32A00C79613 = {
 						CreatedOnToolsVersion = 6.1.1;
-					};
-					5F1C742D1A4CA32B00C79613 = {
-						CreatedOnToolsVersion = 6.1.1;
-						TestTargetID = 5F1C741A1A4CA32A00C79613;
 					};
 				};
 			};
@@ -178,13 +172,35 @@
 			mainGroup = 5F1C74121A4CA32A00C79613;
 			productRefGroup = 5F1C741C1A4CA32A00C79613 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 5FE839F51A4D710600D29914 /* Products */;
+					ProjectRef = 5FE839F41A4D710600D29914 /* OpenEmu-SDK.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				5F1C741A1A4CA32A00C79613 /* DS4 Tool */,
-				5F1C742D1A4CA32B00C79613 /* DS4 ToolTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		5FE839FB1A4D710600D29914 /* OpenEmuBase.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OpenEmuBase.framework;
+			remoteRef = 5FE839FA1A4D710600D29914 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5FE839FD1A4D710600D29914 /* OpenEmuSystem.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OpenEmuSystem.framework;
+			remoteRef = 5FE839FC1A4D710600D29914 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		5F1C74191A4CA32A00C79613 /* Resources */ = {
@@ -193,13 +209,7 @@
 			files = (
 				5F1C74261A4CA32A00C79613 /* Images.xcassets in Resources */,
 				5F1C74291A4CA32A00C79613 /* MainMenu.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5F1C742C1A4CA32B00C79613 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				5FE839F71A4D710600D29914 /* Controller-Database.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,26 +220,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FE83A031A4D73BF00D29914 /* EventProcessor.m in Sources */,
 				5F1C74241A4CA32A00C79613 /* main.m in Sources */,
 				5F1C74221A4CA32A00C79613 /* AppDelegate.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5F1C742A1A4CA32B00C79613 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5F1C74351A4CA32B00C79613 /* DS4_ToolTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		5F1C74301A4CA32B00C79613 /* PBXTargetDependency */ = {
+		5FE839FF1A4D712000D29914 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5F1C741A1A4CA32A00C79613 /* DS4 Tool */;
-			targetProxy = 5F1C742F1A4CA32B00C79613 /* PBXContainerItemProxy */;
+			name = OpenEmuSystem;
+			targetProxy = 5FE839FE1A4D712000D29914 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -326,6 +329,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/**",
+				);
 				INFOPLIST_FILE = "DS4 Tool/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -337,45 +345,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/**",
+				);
 				INFOPLIST_FILE = "DS4 Tool/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		5F1C743C1A4CA32B00C79613 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "DS4 ToolTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DS4 Tool.app/Contents/MacOS/DS4 Tool";
-			};
-			name = Debug;
-		};
-		5F1C743D1A4CA32B00C79613 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "DS4 ToolTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DS4 Tool.app/Contents/MacOS/DS4 Tool";
 			};
 			name = Release;
 		};
@@ -398,14 +375,7 @@
 				5F1C743A1A4CA32B00C79613 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		5F1C743B1A4CA32B00C79613 /* Build configuration list for PBXNativeTarget "DS4 ToolTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5F1C743C1A4CA32B00C79613 /* Debug */,
-				5F1C743D1A4CA32B00C79613 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
