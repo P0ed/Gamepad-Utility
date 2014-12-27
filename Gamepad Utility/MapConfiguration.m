@@ -1,14 +1,16 @@
 //
-//  EventProcessor.m
-//  DS4 Tool
+//  MapConfiguration.m
+//  Gamepad Utility
 //
 //  Created by Konstantin Sukharev on 26/12/14.
 //  Copyright (c) 2014 P0ed. All rights reserved.
 //
 
-#import "EventProcessor.h"
+#import "MapConfiguration.h"
 #import "OpenEmuSystem/OEHIDEvent.h"
 #import "Vectors.h"
+
+@import Carbon.HIToolbox.Events;
 
 
 const CGFloat kThreshold = 0.1;
@@ -16,7 +18,8 @@ const CGFloat kMouseShiftMultiplier = 16;
 const CGFloat kScrollShiftMultiplier = -20;
 
 
-@implementation EventProcessor {
+@implementation MapConfiguration {
+	
 	NSTimer *_timer;
 	
 	CGVector _mouseShift;
@@ -24,10 +27,12 @@ const CGFloat kScrollShiftMultiplier = -20;
 	BOOL _clicked;
 }
 
-- (void)processEvent:(OEHIDEvent *)event {
+- (BOOL)handleEvent:(OEHIDEvent *)event {
+	
+	BOOL handled = YES;
 	
 	if (event.type == OEHIDEventTypeAxis) {
-		
+		/* Mouse move and scroll */
 		if (event.axis == OEHIDEventAxisX) {
 			_mouseShift.dx = event.value;
 		}
@@ -40,15 +45,62 @@ const CGFloat kScrollShiftMultiplier = -20;
 		else if (event.axis == OEHIDEventAxisZ) {
 			_scrollShift.dy = event.value;
 		}
+		else {
+			handled = NO;
+		}
 	}
 	else if (event.type == OEHIDEventTypeButton) {
 		
 		if (event.buttonNumber == 2) {
+			/* Mouse left click */
 			_clicked = event.state;
 			[self mouseClick:_clicked];
 		}
+		else if (event.buttonNumber == 1) {
+			/* Enter */
+			[self postKeyboardEvent:kVK_Return state:event.state];
+		}
+		else if (event.buttonNumber == 3) {
+			/* Delete */
+			[self postKeyboardEvent:kVK_Delete state:event.state];
+		}
+		else if (event.buttonNumber == 4) {
+			/* Tab */
+			[self postKeyboardEvent:kVK_Tab state:event.state];
+		}
+		else if (event.buttonNumber == 5) {
+			/* Shift */
+			[self postKeyboardEvent:kVK_Shift state:event.state];
+		}
+		else if (event.buttonNumber == 6) {
+			/* Command */
+			[self postKeyboardEvent:kVK_Command state:event.state];
+		}
+		else {
+			handled = NO;
+		}
+	}
+	else if (event.type == OEHIDEventTypeHatSwitch) {
+		/* Arrows */
+		if (event.hatDirection & OEHIDEventHatDirectionNorth) {
+			[self postKeyboardEvent:kVK_UpArrow state:OEHIDEventStateOn];
+			[self postKeyboardEvent:kVK_UpArrow state:OEHIDEventStateOff];
+		}
+		if (event.hatDirection & OEHIDEventHatDirectionSouth) {
+			[self postKeyboardEvent:kVK_DownArrow state:OEHIDEventStateOn];
+			[self postKeyboardEvent:kVK_DownArrow state:OEHIDEventStateOff];
+		}
+		if (event.hatDirection & OEHIDEventHatDirectionWest) {
+			[self postKeyboardEvent:kVK_LeftArrow state:OEHIDEventStateOn];
+			[self postKeyboardEvent:kVK_LeftArrow state:OEHIDEventStateOff];
+		}
+		if (event.hatDirection & OEHIDEventHatDirectionEast) {
+			[self postKeyboardEvent:kVK_RightArrow state:OEHIDEventStateOn];
+			[self postKeyboardEvent:kVK_RightArrow state:OEHIDEventStateOff];
+		}
 	}
 	
+	/* Timer for mouse move and scroll update */
 	if (CGVectorLength(_mouseShift) > kThreshold || CGVectorLength(_scrollShift) > kThreshold) {
 		
 		if (!_timer) _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 / 42
@@ -56,18 +108,30 @@ const CGFloat kScrollShiftMultiplier = -20;
 															 selector:@selector(update:)
 															 userInfo:nil
 															  repeats:YES];
-	} else {
+	}
+	else {
+		
 		[_timer invalidate], _timer = nil;
 	}
+	
+	return handled;
 }
 
 - (void)update:(NSTimer *)timer {
+	
 	if (CGVectorLength(_mouseShift) > kThreshold) {
 		[self moveMouse:_mouseShift];
 	}
 	else if (CGVectorLength(_scrollShift) > kThreshold) {
 		[self scrollContent:_scrollShift];
 	}
+}
+
+- (void)postKeyboardEvent:(CGKeyCode)code state:(OEHIDEventState)state {
+	
+	CGEventRef event = CGEventCreateKeyboardEvent(NULL, code, state);
+	CGEventPost(kCGHIDEventTap, event);
+	CFRelease(event);
 }
 
 - (void)moveMouse:(CGVector)vector {
@@ -98,13 +162,13 @@ const CGFloat kScrollShiftMultiplier = -20;
 	CFRelease(event);
 }
 
-- (void)mouseClick:(BOOL)down {
+- (void)mouseClick:(OEHIDEventState)state {
 	
 	CGPoint currentLocation = NSEvent.mouseLocation;
 	CGPoint mousePoint = CGPointMake(currentLocation.x, NSScreen.mainScreen.frame.size.height - currentLocation.y);
 	
 	CGEventRef event = CGEventCreateMouseEvent(NULL,
-							down ? kCGEventLeftMouseDown : kCGEventLeftMouseUp,
+							state ? kCGEventLeftMouseDown : kCGEventLeftMouseUp,
 							mousePoint,
 							kCGMouseButtonLeft);
 	CGEventPost(kCGHIDEventTap, event);

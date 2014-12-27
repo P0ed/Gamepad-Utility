@@ -1,6 +1,6 @@
 //
-//  AppDelegate.h
-//  DS4 Tool
+//  main.m
+//  Gamepad Utility
 //
 //  Created by Konstantin Sukharev on 25/12/14.
 //  Copyright (c) 2014 P0ed. All rights reserved.
@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
-@end
-
+int main(int argc, const char * argv[]) {
+	return NSApplicationMain(argc, argv);
+}

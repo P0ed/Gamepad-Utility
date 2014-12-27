@@ -13,7 +13,7 @@
 		5F1C74291A4CA32A00C79613 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F1C74271A4CA32A00C79613 /* MainMenu.xib */; };
 		5FE839F71A4D710600D29914 /* Controller-Database.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5FE839F31A4D710600D29914 /* Controller-Database.plist */; };
 		5FE83A001A4D712500D29914 /* OpenEmuSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE839FD1A4D710600D29914 /* OpenEmuSystem.framework */; };
-		5FE83A031A4D73BF00D29914 /* EventProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE83A021A4D73BF00D29914 /* EventProcessor.m */; };
+		5FE83A031A4D73BF00D29914 /* MapConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE83A021A4D73BF00D29914 /* MapConfiguration.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5F1C741B1A4CA32A00C79613 /* DS4 Tool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DS4 Tool.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F1C741B1A4CA32A00C79613 /* Gamepad Utility.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gamepad Utility.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F1C741F1A4CA32A00C79613 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F1C74201A4CA32A00C79613 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5F1C74211A4CA32A00C79613 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -50,8 +50,8 @@
 		5F1C74281A4CA32A00C79613 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		5FE839F31A4D710600D29914 /* Controller-Database.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Controller-Database.plist"; sourceTree = "<group>"; };
 		5FE839F41A4D710600D29914 /* OpenEmu-SDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "OpenEmu-SDK.xcodeproj"; sourceTree = "<group>"; };
-		5FE83A011A4D73BF00D29914 /* EventProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventProcessor.h; sourceTree = "<group>"; };
-		5FE83A021A4D73BF00D29914 /* EventProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventProcessor.m; sourceTree = "<group>"; };
+		5FE83A011A4D73BF00D29914 /* MapConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapConfiguration.h; sourceTree = "<group>"; };
+		5FE83A021A4D73BF00D29914 /* MapConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapConfiguration.m; sourceTree = "<group>"; };
 		5FE83A041A4D8A1300D29914 /* Vectors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vectors.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,7 +70,7 @@
 		5F1C74121A4CA32A00C79613 = {
 			isa = PBXGroup;
 			children = (
-				5F1C741D1A4CA32A00C79613 /* DS4 Tool */,
+				5F1C741D1A4CA32A00C79613 /* Gamepad Utility */,
 				5F1C741C1A4CA32A00C79613 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -78,25 +78,25 @@
 		5F1C741C1A4CA32A00C79613 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5F1C741B1A4CA32A00C79613 /* DS4 Tool.app */,
+				5F1C741B1A4CA32A00C79613 /* Gamepad Utility.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5F1C741D1A4CA32A00C79613 /* DS4 Tool */ = {
+		5F1C741D1A4CA32A00C79613 /* Gamepad Utility */ = {
 			isa = PBXGroup;
 			children = (
 				5FE839F21A4D70FB00D29914 /* OpenEmu SDK */,
 				5F1C74201A4CA32A00C79613 /* AppDelegate.h */,
 				5F1C74211A4CA32A00C79613 /* AppDelegate.m */,
 				5FE83A041A4D8A1300D29914 /* Vectors.h */,
-				5FE83A011A4D73BF00D29914 /* EventProcessor.h */,
-				5FE83A021A4D73BF00D29914 /* EventProcessor.m */,
+				5FE83A011A4D73BF00D29914 /* MapConfiguration.h */,
+				5FE83A021A4D73BF00D29914 /* MapConfiguration.m */,
 				5F1C74251A4CA32A00C79613 /* Images.xcassets */,
 				5F1C74271A4CA32A00C79613 /* MainMenu.xib */,
 				5F1C741E1A4CA32A00C79613 /* Supporting Files */,
 			);
-			path = "DS4 Tool";
+			path = "Gamepad Utility";
 			sourceTree = "<group>";
 		};
 		5F1C741E1A4CA32A00C79613 /* Supporting Files */ = {
@@ -111,8 +111,8 @@
 		5FE839F21A4D70FB00D29914 /* OpenEmu SDK */ = {
 			isa = PBXGroup;
 			children = (
-				5FE839F31A4D710600D29914 /* Controller-Database.plist */,
 				5FE839F41A4D710600D29914 /* OpenEmu-SDK.xcodeproj */,
+				5FE839F31A4D710600D29914 /* Controller-Database.plist */,
 			);
 			name = "OpenEmu SDK";
 			sourceTree = "<group>";
@@ -129,9 +129,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5F1C741A1A4CA32A00C79613 /* DS4 Tool */ = {
+		5F1C741A1A4CA32A00C79613 /* Gamepad Utility */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5F1C74381A4CA32B00C79613 /* Build configuration list for PBXNativeTarget "DS4 Tool" */;
+			buildConfigurationList = 5F1C74381A4CA32B00C79613 /* Build configuration list for PBXNativeTarget "Gamepad Utility" */;
 			buildPhases = (
 				5F1C74171A4CA32A00C79613 /* Sources */,
 				5F1C74181A4CA32A00C79613 /* Frameworks */,
@@ -142,9 +142,9 @@
 			dependencies = (
 				5FE839FF1A4D712000D29914 /* PBXTargetDependency */,
 			);
-			name = "DS4 Tool";
+			name = "Gamepad Utility";
 			productName = "DS4 Tool";
-			productReference = 5F1C741B1A4CA32A00C79613 /* DS4 Tool.app */;
+			productReference = 5F1C741B1A4CA32A00C79613 /* Gamepad Utility.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -161,7 +161,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5F1C74161A4CA32A00C79613 /* Build configuration list for PBXProject "DS4 Tool" */;
+			buildConfigurationList = 5F1C74161A4CA32A00C79613 /* Build configuration list for PBXProject "Gamepad Utility" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -180,7 +180,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				5F1C741A1A4CA32A00C79613 /* DS4 Tool */,
+				5F1C741A1A4CA32A00C79613 /* Gamepad Utility */,
 			);
 		};
 /* End PBXProject section */
@@ -220,7 +220,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5FE83A031A4D73BF00D29914 /* EventProcessor.m in Sources */,
+				5FE83A031A4D73BF00D29914 /* MapConfiguration.m in Sources */,
 				5F1C74241A4CA32A00C79613 /* main.m in Sources */,
 				5F1C74221A4CA32A00C79613 /* AppDelegate.m in Sources */,
 			);
@@ -334,8 +334,9 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(PROJECT_DIR)/**",
 				);
-				INFOPLIST_FILE = "DS4 Tool/Info.plist";
+				INFOPLIST_FILE = "Gamepad Utility/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -350,8 +351,9 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(PROJECT_DIR)/**",
 				);
-				INFOPLIST_FILE = "DS4 Tool/Info.plist";
+				INFOPLIST_FILE = "Gamepad Utility/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -359,7 +361,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5F1C74161A4CA32A00C79613 /* Build configuration list for PBXProject "DS4 Tool" */ = {
+		5F1C74161A4CA32A00C79613 /* Build configuration list for PBXProject "Gamepad Utility" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5F1C74361A4CA32B00C79613 /* Debug */,
@@ -368,7 +370,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5F1C74381A4CA32B00C79613 /* Build configuration list for PBXNativeTarget "DS4 Tool" */ = {
+		5F1C74381A4CA32B00C79613 /* Build configuration list for PBXNativeTarget "Gamepad Utility" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5F1C74391A4CA32B00C79613 /* Debug */,

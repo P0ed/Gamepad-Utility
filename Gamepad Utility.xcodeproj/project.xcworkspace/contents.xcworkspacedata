@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:DS4 Tool.xcodeproj">
+      location = "self:Gamepad Utility.xcodeproj">
    </FileRef>
 </Workspace>
