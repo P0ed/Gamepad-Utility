@@ -1,0 +1,15 @@
+PODS:
+  - YOLOKit/base (11.1)
+  - YOLOKit/each (11.1):
+    - YOLOKit/base
+  - YOLOKit/map (11.1):
+    - YOLOKit/base
+
+DEPENDENCIES:
+  - YOLOKit/each
+  - YOLOKit/map
+
+SPEC CHECKSUMS:
+  YOLOKit: 8a770dfd512d50c731e7ec292e1e3a82ae5738dc
+
+COCOAPODS: 0.35.0
