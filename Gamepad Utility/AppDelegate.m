@@ -16,7 +16,6 @@
 
 @implementation AppDelegate {
 	NSStatusItem *_statusItem;
-	id _monitor;
 	NSMutableDictionary *_eventMonitors;
 	NSMutableDictionary *_observers;
 }
@@ -53,10 +52,6 @@
 													[self removeMonitorForDeviceHandler:deviceHandler];
 													[self updateMenu];
 												}];
-//	_eventsController = EventsController.new;
-//	_monitor = [OEDeviceManager.sharedDeviceManager addGlobalEventMonitorHandler:^BOOL(OEDeviceHandler *handler, OEHIDEvent *event) {
-//		return ![_eventsController handleEvent:event forDevice:handler];
-//	}];
 }
 
 - (void)dealloc {
@@ -74,7 +69,6 @@
 		
 		/* Controller remains retained by event monitor's block */
 		EventsController *eventsController = [EventsController controllerForDeviceHandler:deviceHandler];
-		eventsController.nextResponder = self;
 		void(^handler)(OEDeviceHandler *handler, OEHIDEvent *event) = ^(OEDeviceHandler *handler, OEHIDEvent *event) {
 			
 			[eventsController handleEvent:event];
@@ -109,13 +103,10 @@
 	NSArray *controllers = OEDeviceManager.sharedDeviceManager.controllerDeviceHandlers;
 	if (controllers.count) {
 		
-		// Controllers:
+		// Controllers
 		NSMenuItem *devicesItem = NSMenuItem.new;
 		devicesItem.title = [NSString stringWithFormat:@"Devices"];
-		devicesItem.enabled = NO;
 		[appMenu addItem:devicesItem];
-		
-		NSArray *configurationList = MapConfiguration.configurationList;
 		
 		// List
 		controllers.each(^(OEDeviceHandler *deviceHandler) {
@@ -129,7 +120,7 @@
 			[appMenu addItem:controllerItem];
 			
 			controllerItem.submenu = NSMenu.new;
-			configurationList.each(^(NSString *configurationName) {
+			MapConfiguration.configurationList.each(^(NSString *configurationName) {
 				
 				NSMenuItem *configurationItem = NSMenuItem.new;
 				configurationItem.title = configurationName;

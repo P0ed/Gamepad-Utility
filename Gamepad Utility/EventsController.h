@@ -7,13 +7,15 @@
 //
 
 
-@import Cocoa;
-@class OEHIDEvent, OEDeviceHandler;
+@import Foundation;
+@class MapConfiguration, OEHIDEvent, OEDeviceHandler;
 
 
-@interface EventsController : NSResponder
+@interface EventsController : NSObject
+
+@property (nonatomic) MapConfiguration *mapConfiguration;
 
 + (instancetype)controllerForDeviceHandler:(OEDeviceHandler *)deviceHandler;
-- (BOOL)handleEvent:(OEHIDEvent *)event;
+- (BOOL)handleEvent:(OEHIDEvent *)inputEvent;
 
 @end

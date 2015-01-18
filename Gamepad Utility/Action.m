@@ -7,79 +7,159 @@
 //
 
 #import "Action.h"
+#import "OpenEmuSystem/OEHIDEvent.h"
 #import "Event.h"
+#import "NSValue+CGVector.h"
+@import Carbon.HIToolbox.Events;
 
 
-@interface KeyAction : Action
-@property (nonatomic) CGKeyCode keyCode;
-@end
-
-
-@interface MouseClickAction : Action
-@property (nonatomic) CGMouseButton mouseButton;
+@interface Action ()
+@property (nonatomic, copy) void (^postEventBlock)(id input);
 @end
 
 
 @implementation Action
-- (Event *)postEvent { return nil; }
+
+#pragma mark Button actions
++ (instancetype)buttonKeyAction:(CGKeyCode)keyCode {
+	
+	Action *action = Action.new;
+	action.type = ActionTypeButton;
+	action.postEventBlock = ^(NSNumber *input) {
+		[Event postKeyboardEvent:keyCode keyDown:input.boolValue];
+	};
+	
+	return action;
+}
+
++ (instancetype)buttonMouseClickAction:(CGMouseButton)mouseButton {
+	
+	Action *action = Action.new;
+	action.type = ActionTypeButton;
+	action.postEventBlock = ^(NSNumber *input) {
+		[Event postMouseClickEvent:mouseButton buttonDown:input.boolValue];
+	};
+	
+	return action;
+}
+
+#pragma mark Stick actions
++ (instancetype)stickMouseMoveAction {
+	
+	Action *action = Action.new;
+	action.type = ActionTypeStick;
+	action.postEventBlock = ^(NSValue *input) {
+		[Event postMouseMoveEvent:input.vectorValue];
+	};
+	
+	return action;
+}
+
++ (instancetype)stickScrollAction {
+	
+	Action *action = Action.new;
+	action.type = ActionTypeStick;
+	action.postEventBlock = ^(NSValue *input) {
+		[Event postScrollEvent:input.vectorValue];
+	};
+	
+	return action;
+}
+
+#pragma mark D-Pad actions:
++ (instancetype)dPadArrowsAction {
+	
+	Action *action = Action.new;
+	action.type = ActionTypeDPad;
+	
+	NSDictionary *map = @{@(1 << 0): @(kVK_UpArrow),
+						  @(1 << 1): @(kVK_RightArrow),
+						  @(1 << 2): @(kVK_DownArrow),
+						  @(1 << 3): @(kVK_LeftArrow)};
+	
+	action.postEventBlock = ^(NSNumber *input) {
+		
+		uint8_t dPadState = input.intValue & 0xFF;
+		for (int i = 0; i < 8; ++i) {
+
+			if (dPadState & 1 << i) {
+				[Event postKeyboardEvent:[map[@((1 << i % 4))] intValue] keyDown:i > 3];
+			}
+		}
+	};
+
+	return action;
+}
+
++ (instancetype)dPadWASDAction {
+	Action *action = Action.new;
+	action.type = ActionTypeDPad;
+	
+	return action;
+}
+
+#pragma mark Trigger actions:
++ (instancetype)triggerKeyAction:(CGKeyCode)keyCode {
+	Action *action = Action.new;
+	return action;
+}
+
++ (instancetype)triggerMouseClickAction:(CGMouseButton)mouseButton {
+	Action *action = Action.new;
+	return action;
+}
+
++ (instancetype)triggerLModifierAction {
+	Action *action = Action.new;
+	return action;
+}
+
++ (instancetype)triggerRModifierAction {
+	Action *action = Action.new;
+	return action;
+}
+
+#pragma mark Compound key action
++ (instancetype)compoundKeyAction:(NSArray *)keyCodes {
+	Action *action = Action.new;
+	return action;
+}
+
+#pragma mark -
+
+- (void)postEvent:(NSValue *)input {
+	if (_postEventBlock) _postEventBlock(input);
+}
+
 @end
 
 
+#pragma mark - Literal convertibles
 @implementation NSNumber (Action)
 
-- (Action *)keyAction {
-	KeyAction *action = KeyAction.new;
-	action.keyCode = self.intValue;
-	return action;
+- (Action *)buttonKeyAction {
+	return [Action buttonKeyAction:self.intValue];
 }
 
-- (Action *)mouseClickAction {
-	MouseClickAction *action = MouseClickAction.new;
-	action.mouseButton = self.intValue;
-	return action;
+- (Action *)triggerKeyAction {
+	return [Action triggerKeyAction:self.intValue];
 }
 
-@end
+- (Action *)buttonMouseClickAction {
+	return [Action buttonMouseClickAction:self.intValue];
+}
 
-
-@implementation KeyAction
-
-- (Event *)postEvent {
-	
-	CGEventRef CGEvent = CGEventCreateKeyboardEvent(NULL, self.keyCode, true);
-	Event *event = [Event eventWithCGEvent:CGEvent disposeBlock:^(CGEventRef CGEvent) {
-		CGEventSetType(CGEvent, kCGEventKeyUp);
-	}];
-	CFRelease(CGEvent);
-	
-	return event;
+- (Action *)triggerMouseClickAction {
+	return [Action triggerMouseClickAction:self.intValue];
 }
 
 @end
 
 
-@import Cocoa;
-@implementation MouseClickAction
+@implementation NSArray (Action)
 
-- (Event *)postEvent {
-	
-//	NSDictionary *downEventTypeMap = @{
-//									   @(kCGMouseButtonLeft): @(kCGEventLeftMouseDown),
-//									   };
-//	NSDictionary *upEventTypeMap = @{
-//									 @(kCGMouseButtonLeft): @(kCGEventLeftMouseDown),
-//									 };
-	
-	CGPoint currentLocation = NSEvent.mouseLocation;
-	CGPoint mousePoint = CGPointMake(currentLocation.x, NSScreen.mainScreen.frame.size.height - currentLocation.y);
-	
-	CGEventRef CGEvent = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseDown, mousePoint, self.mouseButton);
-	Event *event = [Event eventWithCGEvent:CGEvent disposeBlock:^(CGEventRef CGEvent) {
-//		CGEventSetType(CGEvent, upEventTypeMap[]);
-	}];
-	CFRelease(CGEvent);
-	
-	return event;
+- (Action *)compoundKeyAction {
+	return [Action compoundKeyAction:self];
 }
 
 @end

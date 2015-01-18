@@ -12,9 +12,9 @@
 		5F1C74261A4CA32A00C79613 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F1C74251A4CA32A00C79613 /* Images.xcassets */; };
 		5F1C74291A4CA32A00C79613 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F1C74271A4CA32A00C79613 /* MainMenu.xib */; };
 		5F3099DE1A6A4715000B8CCC /* EventsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3099DD1A6A4715000B8CCC /* EventsController.m */; };
-		5F3099E21A6A4729000B8CCC /* ConfigurationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3099E11A6A4729000B8CCC /* ConfigurationController.m */; };
 		5FBE05FD1A698CD90050A3C4 /* Action.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FBE05FC1A698CD90050A3C4 /* Action.m */; };
 		5FBE06011A69A6A90050A3C4 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FBE06001A69A6A90050A3C4 /* Event.m */; };
+		5FDD55641A6C3E510073C832 /* NSValue+CGVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDD55631A6C3E510073C832 /* NSValue+CGVector.m */; };
 		5FE839F71A4D710600D29914 /* Controller-Database.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5FE839F31A4D710600D29914 /* Controller-Database.plist */; };
 		5FE83A001A4D712500D29914 /* OpenEmuSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE839FD1A4D710600D29914 /* OpenEmuSystem.framework */; };
 		5FE83A031A4D73BF00D29914 /* MapConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE83A021A4D73BF00D29914 /* MapConfiguration.m */; };
@@ -56,13 +56,13 @@
 		5F1C74281A4CA32A00C79613 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		5F3099DC1A6A4715000B8CCC /* EventsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsController.h; sourceTree = "<group>"; };
 		5F3099DD1A6A4715000B8CCC /* EventsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsController.m; sourceTree = "<group>"; };
-		5F3099E01A6A4729000B8CCC /* ConfigurationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationController.h; sourceTree = "<group>"; };
-		5F3099E11A6A4729000B8CCC /* ConfigurationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationController.m; sourceTree = "<group>"; };
 		5F8E69DB1A6A7949006036D7 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		5FBE05FB1A698CD90050A3C4 /* Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Action.h; sourceTree = "<group>"; };
 		5FBE05FC1A698CD90050A3C4 /* Action.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Action.m; sourceTree = "<group>"; };
 		5FBE05FF1A69A6A90050A3C4 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		5FBE06001A69A6A90050A3C4 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
+		5FDD55621A6C3E510073C832 /* NSValue+CGVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+CGVector.h"; sourceTree = "<group>"; };
+		5FDD55631A6C3E510073C832 /* NSValue+CGVector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValue+CGVector.m"; sourceTree = "<group>"; };
 		5FE839F31A4D710600D29914 /* Controller-Database.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Controller-Database.plist"; sourceTree = "<group>"; };
 		5FE839F41A4D710600D29914 /* OpenEmu-SDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "OpenEmu-SDK.xcodeproj"; sourceTree = "<group>"; };
 		5FE83A011A4D73BF00D29914 /* MapConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapConfiguration.h; sourceTree = "<group>"; };
@@ -128,14 +128,14 @@
 				5F1C74211A4CA32A00C79613 /* AppDelegate.m */,
 				5F3099DC1A6A4715000B8CCC /* EventsController.h */,
 				5F3099DD1A6A4715000B8CCC /* EventsController.m */,
-				5F3099E01A6A4729000B8CCC /* ConfigurationController.h */,
-				5F3099E11A6A4729000B8CCC /* ConfigurationController.m */,
 				5FE83A011A4D73BF00D29914 /* MapConfiguration.h */,
 				5FE83A021A4D73BF00D29914 /* MapConfiguration.m */,
 				5FBE05FB1A698CD90050A3C4 /* Action.h */,
 				5FBE05FC1A698CD90050A3C4 /* Action.m */,
 				5FBE05FF1A69A6A90050A3C4 /* Event.h */,
 				5FBE06001A69A6A90050A3C4 /* Event.m */,
+				5FDD55621A6C3E510073C832 /* NSValue+CGVector.h */,
+				5FDD55631A6C3E510073C832 /* NSValue+CGVector.m */,
 				5FE83A041A4D8A1300D29914 /* Vectors.h */,
 				5F1C74251A4CA32A00C79613 /* Images.xcassets */,
 				5F1C74271A4CA32A00C79613 /* MainMenu.xib */,
@@ -306,8 +306,8 @@
 				5F3099DE1A6A4715000B8CCC /* EventsController.m in Sources */,
 				5F1C74241A4CA32A00C79613 /* main.m in Sources */,
 				5FBE05FD1A698CD90050A3C4 /* Action.m in Sources */,
+				5FDD55641A6C3E510073C832 /* NSValue+CGVector.m in Sources */,
 				5F1C74221A4CA32A00C79613 /* AppDelegate.m in Sources */,
-				5F3099E21A6A4729000B8CCC /* ConfigurationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

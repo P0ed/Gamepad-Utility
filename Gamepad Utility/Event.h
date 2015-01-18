@@ -12,7 +12,9 @@
 
 @interface Event : NSObject
 
-+ (instancetype)eventWithCGEvent:(CGEventRef)CGEvent disposeBlock:(void(^)(CGEventRef CGEvent))disposeBlock;
-- (void)dispose;
++ (void)postKeyboardEvent:(CGKeyCode)keyCode keyDown:(BOOL)keyDown;
++ (void)postMouseClickEvent:(CGMouseButton)mouseButton buttonDown:(BOOL)buttonDown;
++ (void)postMouseMoveEvent:(CGVector)vector;
++ (void)postScrollEvent:(CGVector)vector;
 
 @end

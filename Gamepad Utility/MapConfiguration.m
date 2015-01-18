@@ -9,7 +9,6 @@
 
 #import "MapConfiguration.h"
 #import "Action.h"
-#import "Vectors.h"
 #import "OpenEmuSystem/OEHIDEvent.h"
 
 @import Carbon.HIToolbox.Events;
@@ -23,28 +22,22 @@
 
 @implementation MapConfiguration
 
-- (instancetype)init {
-	
-	if (self = [super init]) {
-		
-		_actionsMapTable = @{};
-	}
-	return self;
-}
-
 + (instancetype)defaultConfiguration {
 	
 	MapConfiguration *configuration = self.new;
 	configuration.name = @"Default";
 	configuration.actionsMapTable = @{
-									  @(DSButtonSquare):	@(kVK_ANSI_1).keyAction,
-									  @(DSButtonTriangle):	@(kVK_ANSI_2).keyAction,
-									  @(DSButtonCross):		@(kCGMouseButtonLeft).mouseClickAction,
-									  @(DSButtonCircle):	@(kCGMouseButtonRight).mouseClickAction,
-									  @(DSButtonL):			@(kVK_ANSI_5).keyAction,
-									  @(DSButtonR):			@(kVK_ANSI_6).keyAction,
-									  @(DSButtonShare):		@(kVK_Escape).keyAction,
-									  @(DSButtonOptions):	@(kVK_Return).keyAction,
+									  @(DSButtonSquare):					@(kVK_ANSI_1).buttonKeyAction,
+									  @(DSButtonTriangle):					@(kVK_ANSI_2).buttonKeyAction,
+									  @(DSButtonCross):						@(kCGMouseButtonLeft).buttonMouseClickAction,
+									  @(DSButtonCircle):					@(kCGMouseButtonRight).buttonMouseClickAction,
+									  @(DSButtonL):							@(kVK_ANSI_5).buttonKeyAction,
+									  @(DSButtonR):							@(kVK_ANSI_6).buttonKeyAction,
+									  @(DSButtonShare):						@(kVK_Escape).buttonKeyAction,
+									  @(DSButtonOptions):					@(kVK_Return).buttonKeyAction,
+									  @(DSDPad):							Action.dPadArrowsAction,
+									  @(DSStickRight):						Action.stickMouseMoveAction,
+									  @(DSStickRight | DSModifierRMask):	Action.stickScrollAction,
 									  };
 	return configuration;
 }
@@ -62,11 +55,40 @@
 	return @[@"Default", @"MK9"];
 }
 
-- (Action *)actionForEvent:(OEHIDEvent *)event {
+- (Action *)actionForEvent:(OEHIDEvent *)event modifierFlags:(DSModifierFlags)modifierFlags {
 	
+	DSControl control = 0;
 	
+	if (event.type == OEHIDEventTypeAxis) {
+		
+		if (event.axis == OEHIDEventAxisX || event.axis == OEHIDEventAxisY) {
+			control = DSStickLeft;
+		}
+		else if (event.axis == OEHIDEventAxisZ || event.axis == OEHIDEventAxisRz) {
+			control = DSStickRight;
+		}
+	}
+	else if (event.type == OEHIDEventTypeTrigger) {
 	
-	return nil;
+		if (event.axis == OEHIDEventAxisRx) {
+			control = DSTriggerLeft;
+		}
+		else if (event.axis == OEHIDEventAxisRy) {
+			control = DSTriggerRight;
+		}
+	}
+	else if (event.type == OEHIDEventTypeButton) {
+		control = event.buttonNumber;
+	}
+	else if (event.type == OEHIDEventTypeHatSwitch) {
+		control = DSDPad;
+	}
+	
+	return _actionsMapTable[@(control | modifierFlags)];
+}
+
+- (Action *)actionForControl:(DSControl)control modifierFlags:(DSModifierFlags)modifierFlags {
+	return _actionsMapTable[@(control | modifierFlags)];
 }
 
 @end

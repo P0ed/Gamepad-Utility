@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 P0ed. All rights reserved.
 //
 
-@import Cocoa;
+@import Foundation;
 @class Action, OEHIDEvent;
 
 
@@ -24,11 +24,12 @@ typedef NS_ENUM(NSInteger, DSControl) {
 
 	DSButtonShare = 9,
 	DSButtonOptions = 10,
-	
-	DSButtonUp = 65,
-	DSButtonRight = 66,
-	DSButtonDown = 67,
-	DSButtonLeft = 68,
+
+	DSDPad = 65,
+//	DSButtonUp = 65,
+//	DSButtonRight = 66,
+//	DSButtonDown = 67,
+//	DSButtonLeft = 68,
 	
 	DSStickLeft = 69,
 	DSStickRight = 70,
@@ -38,7 +39,16 @@ typedef NS_ENUM(NSInteger, DSControl) {
 };
 
 
-@interface MapConfiguration : NSResponder /*<NSCoding>*/
+typedef NS_OPTIONS(NSInteger, DSModifierFlags) {
+	
+	DSModifierNoneMask = 0,
+	DSModifierLMask = 1 << 14,
+	DSModifierRMask = 1 << 15,
+	DSModifierLRMask = DSModifierLMask | DSModifierRMask
+};
+
+
+@interface MapConfiguration : NSObject /*<NSCoding>*/
 
 @property (nonatomic, readonly) NSString *name;
 
@@ -46,6 +56,7 @@ typedef NS_ENUM(NSInteger, DSControl) {
 + (instancetype)configurationWithName:(NSString *)name;
 + (NSArray *)configurationList;
 
-- (Action *)actionForEvent:(OEHIDEvent *)event;
+- (Action *)actionForEvent:(OEHIDEvent *)event modifierFlags:(DSModifierFlags)modifierFlags;
+- (Action *)actionForControl:(DSControl)control modifierFlags:(DSModifierFlags)modifierFlags;
 
 @end
