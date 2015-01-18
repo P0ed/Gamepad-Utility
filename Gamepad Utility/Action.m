@@ -106,30 +106,21 @@
 	return [self dPadActionWithMap:map];
 }
 
-#pragma mark Trigger actions:
-+ (instancetype)triggerKeyAction:(CGKeyCode)keyCode {
-	Action *action = Action.new;
-	return action;
-}
-
-+ (instancetype)triggerMouseClickAction:(CGMouseButton)mouseButton {
-	Action *action = Action.new;
-	return action;
-}
-
-+ (instancetype)triggerLModifierAction {
-	Action *action = Action.new;
-	return action;
-}
-
-+ (instancetype)triggerRModifierAction {
-	Action *action = Action.new;
-	return action;
-}
-
 #pragma mark Compound key action
 + (instancetype)compoundKeyAction:(NSArray *)keyCodes {
+	
 	Action *action = Action.new;
+	action.type = ActionTypeButton;
+	action.postEventBlock = ^(NSNumber *input) {
+		
+		NSLog(@"%@", input);
+		for (NSNumber *keyCode in input.boolValue ? keyCodes : keyCodes.reverseObjectEnumerator) {
+			
+			NSLog(@"%@", keyCode);
+			[Event postKeyboardEvent:keyCode.intValue keyDown:input.boolValue];
+		}
+	};
+	
 	return action;
 }
 
@@ -149,16 +140,8 @@
 	return [Action buttonKeyAction:self.intValue];
 }
 
-- (Action *)triggerKeyAction {
-	return [Action triggerKeyAction:self.intValue];
-}
-
 - (Action *)buttonMouseClickAction {
 	return [Action buttonMouseClickAction:self.intValue];
-}
-
-- (Action *)triggerMouseClickAction {
-	return [Action triggerMouseClickAction:self.intValue];
 }
 
 @end

@@ -31,11 +31,18 @@
 									  @(DSButtonTriangle):					@(kVK_ANSI_2).buttonKeyAction,
 									  @(DSButtonCross):						@(kCGMouseButtonLeft).buttonMouseClickAction,
 									  @(DSButtonCircle):					@(kCGMouseButtonRight).buttonMouseClickAction,
-									  @(DSButtonL):							@(kVK_ANSI_5).buttonKeyAction,
-									  @(DSButtonR):							@(kVK_ANSI_6).buttonKeyAction,
+									  @(DSButtonL):							@(kVK_Command).buttonKeyAction,
+									  @(DSButtonR):							@(kVK_Shift).buttonKeyAction,
+									  @(DSButtonL | DSModifierLMask):		@[@(kVK_Command), @(kVK_DownArrow)].compoundKeyAction,
+									  @(DSButtonR | DSModifierLMask):		@[@(kVK_Command), @(kVK_UpArrow)].compoundKeyAction,
+									  @(DSButtonL | DSModifierRMask):		@[@(kVK_Control), @(kVK_Shift), @(kVK_Tab)].compoundKeyAction,
+									  @(DSButtonR | DSModifierRMask):		@[@(kVK_Control), @(kVK_Tab)].compoundKeyAction,
+									  @(DSButtonL | DSModifierLRMask):		@[@(kVK_Command), @(kVK_Shift), @(kVK_Tab)].compoundKeyAction,
+									  @(DSButtonR | DSModifierLRMask):		@[@(kVK_Command), @(kVK_Tab)].compoundKeyAction,
 									  @(DSButtonShare):						@(kVK_Escape).buttonKeyAction,
 									  @(DSButtonOptions):					@(kVK_Return).buttonKeyAction,
 									  @(DSDPad):							Action.dPadArrowsAction,
+									  @(DSDPad | DSModifierLMask):			Action.dPadWASDAction,
 									  @(DSStickRight):						Action.stickMouseMoveAction,
 									  @(DSStickRight | DSModifierRMask):	Action.stickScrollAction,
 									  };
@@ -55,7 +62,7 @@
 	return @[@"Default", @"MK9"];
 }
 
-- (Action *)actionForEvent:(OEHIDEvent *)event modifierFlags:(DSModifierFlags)modifierFlags {
+- (DSControl)controlForEvent:(OEHIDEvent *)event {
 	
 	DSControl control = 0;
 	
@@ -68,15 +75,6 @@
 			control = DSStickRight;
 		}
 	}
-	else if (event.type == OEHIDEventTypeTrigger) {
-	
-		if (event.axis == OEHIDEventAxisRx) {
-			control = DSTriggerLeft;
-		}
-		else if (event.axis == OEHIDEventAxisRy) {
-			control = DSTriggerRight;
-		}
-	}
 	else if (event.type == OEHIDEventTypeButton) {
 		control = event.buttonNumber;
 	}
@@ -84,7 +82,7 @@
 		control = DSDPad;
 	}
 	
-	return _actionsMapTable[@(control | modifierFlags)];
+	return control;
 }
 
 - (Action *)actionForControl:(DSControl)control modifierFlags:(DSModifierFlags)modifierFlags {

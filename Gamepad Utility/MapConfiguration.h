@@ -21,6 +21,8 @@ typedef NS_ENUM(NSInteger, DSControl) {
 
 	DSButtonL = 5,
 	DSButtonR = 6,
+	DSTriggerLeft = 7,
+	DSTriggerRight = 8,
 
 	DSButtonShare = 9,
 	DSButtonOptions = 10,
@@ -32,10 +34,7 @@ typedef NS_ENUM(NSInteger, DSControl) {
 //	DSButtonLeft = 68,
 	
 	DSStickLeft = 69,
-	DSStickRight = 70,
-	
-	DSTriggerLeft = 71,
-	DSTriggerRight = 72
+	DSStickRight = 70
 };
 
 
@@ -56,7 +55,7 @@ typedef NS_OPTIONS(NSInteger, DSModifierFlags) {
 + (instancetype)configurationWithName:(NSString *)name;
 + (NSArray *)configurationList;
 
-- (Action *)actionForEvent:(OEHIDEvent *)event modifierFlags:(DSModifierFlags)modifierFlags;
+- (DSControl)controlForEvent:(OEHIDEvent *)event;
 - (Action *)actionForControl:(DSControl)control modifierFlags:(DSModifierFlags)modifierFlags;
 
 @end

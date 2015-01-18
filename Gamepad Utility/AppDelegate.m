@@ -56,10 +56,10 @@
 
 - (void)dealloc {
 	
-	[_observers.allValues enumerateObjectsUsingBlock:^(id observer, NSUInteger idx, BOOL *stop) {
+	_observers.allValues.each(^(id observer) {
 		
 		[NSNotificationCenter.defaultCenter removeObserver:observer];
-	}];
+	});
 }
 
 - (void)addMonitorForDeviceHandler:(OEDeviceHandler *)deviceHandler {

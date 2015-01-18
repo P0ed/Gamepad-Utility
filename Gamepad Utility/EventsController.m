@@ -27,11 +27,9 @@
 	
 	CGVector _leftJoystick;
 	CGVector _rightJoystick;
-	CGFloat _leftTrigger;
-	CGFloat _rightTrigger;
 	OEHIDEventHatDirection _hatDirection;
 	
-	NSMutableDictionary *_events;
+	NSMutableDictionary *_actions;
 }
 
 + (instancetype)controllerForDeviceHandler:(OEDeviceHandler *)deviceHandler {
@@ -45,6 +43,7 @@
 		
 		_deviceHandler = deviceHandler;
 		_mapConfiguration = MapConfiguration.defaultConfiguration;
+		_actions = @{}.mutableCopy;
 	}
 	return self;
 }
@@ -52,7 +51,8 @@
 /* f(g(OEHIDEvent) -> Action) -> Event */
 - (BOOL)handleEvent:(OEHIDEvent *)event {
 	
-	Action *action = [_mapConfiguration actionForEvent:event modifierFlags:_modifierFlags];
+	DSControl control = [_mapConfiguration controlForEvent:event];
+	Action *action = _actions[@(control)] ?: [_mapConfiguration actionForControl:control modifierFlags:_modifierFlags];
 	
 	if (event.type == OEHIDEventTypeAxis) {
 		
@@ -69,29 +69,50 @@
 			_rightJoystick.dy = event.value;
 		}
 	}
-	else if (event.type == OEHIDEventTypeTrigger) {
-
-		if (event.axis == OEHIDEventAxisRx) {
-			_leftTrigger = event.value;
-		}
-		else if (event.axis == OEHIDEventAxisRy) {
-			_rightTrigger = event.value;
-		}
-	}
 	else if (event.type == OEHIDEventTypeButton) {
-
+		
 		[action postEvent:@(event.state)];
+		
+		if (event.state && action) {
+			[_actions setObject:action forKey:@(control)];
+		} else {
+			[_actions removeObjectForKey:@(control)];
+		}
+		
+		/* Temporary solution */
+		if (event.buttonNumber == 7) {
+			
+			if (event.state) {
+				_modifierFlags |= DSModifierLMask;
+			} else {
+				_modifierFlags &= ~DSModifierLMask;
+			}
+		}
+		else if (event.buttonNumber == 8) {
+			
+			if (event.state) {
+				_modifierFlags |= DSModifierRMask;
+			} else {
+				_modifierFlags &= ~DSModifierRMask;
+			}
+		}
 	}
 	else if (event.type == OEHIDEventTypeHatSwitch) {
 
 		uint8_t previous = _hatDirection & 0xF;
 		uint8_t current = _hatDirection = event.hatDirection & 0xF;
 		
-		uint8_t down = ~(~current | previous) & 0xF;
+		uint8_t down = ~(previous | ~current) & 0xF;
 		uint8_t up = ~(~previous | current) & 0xF;
 		
 		uint8_t input = down << 4 | up;
 		[action postEvent:@(input)];
+		
+		if (event.hatDirection && action) {
+			[_actions setObject:action forKey:@(control)];
+		} else {
+			[_actions removeObjectForKey:@(control)];
+		}
 	}
 	
 	/* Timer for mouse move and scroll update */
@@ -114,24 +135,6 @@
 	
 	return YES;
 }
-
-///* Modifiers */
-//if (event.axis == OEHIDEventAxisRx) {
-//	
-//	if (event.value > kModifierThreshold) {
-//		_modifiers |= ModifiersL;
-//	} else {
-//		_modifiers &= ~ModifiersL;
-//	}
-//}
-//else if (event.axis == OEHIDEventAxisRy) {
-//	
-//	if (event.value > kModifierThreshold) {
-//		_modifiers |= ModifiersR;
-//	} else {
-//		_modifiers &= ~ModifiersR;
-//	}
-//}
 
 - (void)update:(NSTimer *)timer {
 	

@@ -36,12 +36,6 @@ typedef NS_ENUM(NSInteger, ActionType) {
 + (instancetype)dPadArrowsAction;
 + (instancetype)dPadWASDAction;
 
-// Trigger actions:
-+ (instancetype)triggerKeyAction:(CGKeyCode)keyCode;
-+ (instancetype)triggerMouseClickAction:(CGMouseButton)mouseButton;
-+ (instancetype)triggerLModifierAction;
-+ (instancetype)triggerRModifierAction;
-
 // Compound key action
 + (instancetype)compoundKeyAction:(NSArray *)keyCodes;
 
@@ -52,9 +46,7 @@ typedef NS_ENUM(NSInteger, ActionType) {
 
 @interface NSNumber (Action)
 - (Action *)buttonKeyAction;
-- (Action *)triggerKeyAction;
 - (Action *)buttonMouseClickAction;
-- (Action *)triggerMouseClickAction;
 @end
 
 
