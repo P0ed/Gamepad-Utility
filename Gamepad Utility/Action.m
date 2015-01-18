@@ -67,35 +67,43 @@
 }
 
 #pragma mark D-Pad actions:
-+ (instancetype)dPadArrowsAction {
++ (instancetype)dPadActionWithMap:(NSDictionary *)map {
 	
 	Action *action = Action.new;
 	action.type = ActionTypeDPad;
+	
+	action.postEventBlock = ^(NSNumber *input) {
+		
+		uint8_t dPadState = input.intValue & 0xFF;
+		for (int i = 0; i < 8; ++i) {
+			
+			if (dPadState & 1 << i) {
+				[Event postKeyboardEvent:[map[@((1 << i % 4))] intValue] keyDown:i > 3];
+			}
+		}
+	};
+	
+	return action;
+}
+
++ (instancetype)dPadArrowsAction {
 	
 	NSDictionary *map = @{@(1 << 0): @(kVK_UpArrow),
 						  @(1 << 1): @(kVK_RightArrow),
 						  @(1 << 2): @(kVK_DownArrow),
 						  @(1 << 3): @(kVK_LeftArrow)};
 	
-	action.postEventBlock = ^(NSNumber *input) {
-		
-		uint8_t dPadState = input.intValue & 0xFF;
-		for (int i = 0; i < 8; ++i) {
-
-			if (dPadState & 1 << i) {
-				[Event postKeyboardEvent:[map[@((1 << i % 4))] intValue] keyDown:i > 3];
-			}
-		}
-	};
-
-	return action;
+	return [self dPadActionWithMap:map];
 }
 
 + (instancetype)dPadWASDAction {
-	Action *action = Action.new;
-	action.type = ActionTypeDPad;
 	
-	return action;
+	NSDictionary *map = @{@(1 << 0): @(kVK_ANSI_W),
+						  @(1 << 1): @(kVK_ANSI_D),
+						  @(1 << 2): @(kVK_ANSI_S),
+						  @(1 << 3): @(kVK_ANSI_A)};
+	
+	return [self dPadActionWithMap:map];
 }
 
 #pragma mark Trigger actions:
